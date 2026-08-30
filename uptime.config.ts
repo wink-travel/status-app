@@ -15,6 +15,12 @@ const pageConfig: PageConfig = {
     'Backend APIs': ['api', 'integrations', 'partner', 'iam'],
     'Frontend Apps': ['book', 'app'],
   },
+  // Brand assets, served from Cloudinary and resized on the fly via URL transformations
+  // (w_<px>,q_auto,f_auto -> right-sized, auto-format/quality) so we don't ship the full
+  // 2048x2048 / 710x170 source files to every visitor.
+  favicon:
+    'https://res.cloudinary.com/traveliko/image/upload/w_128,h_128,c_fill,q_auto,f_auto/v1700552066/wink/icon_text_white_purple_bg.png',
+  logo: 'https://res.cloudinary.com/traveliko/image/upload/w_400,q_auto,f_auto/v1788081012/wink/wink-logo.png',
 }
 
 const workerConfig: WorkerConfig = {
