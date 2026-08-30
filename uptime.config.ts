@@ -40,13 +40,16 @@ const workerConfig: WorkerConfig = {
       responseKeyword: '"status":"UP"',
     },
     {
+      // partner-app was rearchitected as gRPC-only (spring.main.web-application-type=none),
+      // so there's no HTTP surface or /actuator/health left to check - a plain HTTP GET
+      // against the gRPC (Netty/h2c) listener deterministically returns 415 Unsupported
+      // Media Type when the service is healthy, vs. a timeout/5xx when it's actually down.
       id: 'partner',
       name: 'Partner',
       method: 'GET',
-      target: 'https://partner.wink.travel/actuator/health',
+      target: 'https://partner.wink.travel',
       statusPageLink: 'https://partner.wink.travel',
-      expectedCodes: [200],
-      responseKeyword: '"status":"UP"',
+      expectedCodes: [415],
     },
     {
       // iam.wink.travel's security filter intercepts every path (including /actuator/health)
