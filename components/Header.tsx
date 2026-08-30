@@ -32,8 +32,8 @@ export default function Header({ style }: { style?: React.CSSProperties }) {
           >
             <Image
               src={pageConfig.logo ?? '/logo.svg'}
-              h={56}
-              w={{ base: 140, sm: 190 }}
+              h={28}
+              w={{ base: 70, sm: 95 }}
               fit="contain"
               alt="logo"
             />
