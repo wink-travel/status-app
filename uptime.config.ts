@@ -46,21 +46,16 @@ const workerConfig: WorkerConfig = {
       responseKeyword: '"status":"UP"',
     },
     {
-      // NOTE: this currently checks the pre-gRPC servlet app (still what's live in prod).
-      // `apps/partner-app` in monorepo-java has been rearchitected as gRPC-only
-      // (spring.main.web-application-type=none) with no HTTP/actuator surface at all -
-      // once that ships to production, this check needs to change to something like:
-      //   target: 'https://partner.wink.travel', expectedCodes: [415]
-      // since a plain HTTP GET against the gRPC-only Netty server deterministically
-      // returns 415 Unsupported Media Type when it's healthy (vs. a timeout/5xx when it's
-      // actually down) - there's no HTTP path or /actuator/health left to hit at that point.
+      // partner-app was rearchitected as gRPC-only (spring.main.web-application-type=none),
+      // so there's no HTTP surface or /actuator/health left to check - a plain HTTP GET
+      // against the gRPC (Netty/h2c) listener deterministically returns 415 Unsupported
+      // Media Type when the service is healthy, vs. a timeout/5xx when it's actually down.
       id: 'partner',
       name: 'Partner',
       method: 'GET',
-      target: 'https://partner.wink.travel/actuator/health',
+      target: 'https://partner.wink.travel',
       statusPageLink: 'https://partner.wink.travel',
-      expectedCodes: [200],
-      responseKeyword: '"status":"UP"',
+      expectedCodes: [415],
     },
     {
       // iam.wink.travel's security filter intercepts every path (including /actuator/health)
