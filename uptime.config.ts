@@ -21,6 +21,13 @@ const pageConfig: PageConfig = {
   favicon:
     'https://res.cloudinary.com/traveliko/image/upload/w_128,h_128,c_fill,q_auto,f_auto/v1700552066/wink/icon_text_white_purple_bg.png',
   logo: 'https://res.cloudinary.com/traveliko/image/upload/w_200,q_auto,f_auto/v1788081012/wink/wink-logo.png',
+  // `logo` above is a flat white-background PNG (fine on the light header, but renders as
+  // a mismatched white box on the dark header). The brand team's dark variant
+  // (wink/wink-logo-d.png) has the same problem in reverse - it's a flat near-black PNG,
+  // not transparent - so `public/logo-dark.png` is a locally processed copy with the
+  // background keyed out to transparent (see git history for how it was derived), keeping
+  // the white wordmark and brand-purple icon intact.
+  logoDark: '/logo-dark.png',
 }
 
 const workerConfig: WorkerConfig = {

@@ -6,6 +6,11 @@ export type PageConfig = {
   group?: PageConfigGroup
   favicon?: string
   logo?: string
+  // Optional dark-mode variant of `logo`, shown instead when the page is in dark color
+  // scheme. Needed whenever the light-mode logo isn't a transparent asset that can just
+  // sit on any background (e.g. it's flat-colored/opaque and would render as a mismatched
+  // box on a dark header otherwise).
+  logoDark?: string
   maintenances?: {
     upcomingColor?: string
   }
